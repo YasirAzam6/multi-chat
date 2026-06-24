@@ -1,0 +1,16 @@
+{
+  "tenant_id": "tenant_2",
+  "organization_id": "org_tenant_2",
+  "llm_model": "gpt-4o",
+  "temperature": 0.7,
+  "max_tokens": 2000,
+
+  "embedding_model": "text-embedding-3-small",
+  "retriever": "vector",
+  "top_k": 8,
+
+  "system_prompt": "You are a friendly assistant helping users understand the document related queries.",
+  "style_prompt": "Use an engaging and friendly tone. Keep responses conversational and persuasive. Short paragraphs are preferred.",
+  "guardrails": "Do not promise discounts or guarantees unless explicitly stated in the provided documents. Do not fabricate product features.",
+  "agent_bits": ""
+}

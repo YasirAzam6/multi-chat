@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Tenant RAG Chat</title>
+    <link rel="stylesheet" href="/static/app.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <!-- Tenant Selector -->
+        <div class="sidebar-section tenant-section">
+          <label class="sidebar-label">Active Tenant</label>
+          <select id="tenant-select" class="sidebar-select">
+            <option value="tenant_1">tenant_1</option>
+            <option value="tenant_2">tenant_2</option>
+          </select>
+        </div>
+
+        <!-- Document Upload Section -->
+        <div class="sidebar-section upload-section">
+          <div class="upload-header">
+            <h3 class="upload-title">Upload Documents</h3>
+          </div>
+          
+          <form id="upload-form" class="upload-form">
+            <label class="form-label">
+              <span class="label-text">Select File</span>
+              <input id="file-input" type="file" class="file-input" accept=".pdf,.docx,.csv,.txt,.html,.md" required />
+            </label>
+            
+            <label class="form-label">
+              <span class="label-text">Document Name (optional)</span>
+              <input id="doc-name-input" type="text" class="text-input" placeholder="Use filename if blank" />
+            </label>
+            
+            <div id="upload-status" class="upload-status"></div>
+            
+            <button type="submit" class="upload-button">Upload Document</button>
+          </form>
+        </div>
+
+        <!-- Chat History Section -->
+        <div class="sidebar-section history-section">
+          <div class="history-header">
+            <h3 class="history-title">Chat History</h3>
+            <button id="new-chat-button" class="new-chat-btn" title="Start new chat">+</button>
+          </div>
+          
+          <div id="chat-history" class="chat-history">
+            <div class="history-empty">
+              <p>No conversations yet</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Chat Area -->
+      <main class="chat-main">
+        <!-- Header -->
+        <div class="chat-header">
+          <div class="header-content">
+            <h1 class="app-title">Multi-Tenant RAG Chat</h1>
+            <p class="app-subtitle">Upload files, ask questions, and review relevant context</p>
+          </div>
+          <button id="clear-button" class="header-button clear-btn" title="Clear chat">Clear</button>
+        </div>
+
+        <!-- Messages Container -->
+        <div id="chat-window" class="chat-window">
+          <div class="chat-empty-state">
+            <div class="empty-state-content">
+              <h2>Welcome to Multi-Tenant RAG</h2>
+              <p>Select a tenant, upload documents, and start asking questions</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input Area -->
+        <div class="chat-input-container">
+          <form id="chat-form" class="chat-form">
+            <!-- Options Bar -->
+            <div class="chat-options">
+              <label class="option-item context-toggle-label">
+                <input id="context-toggle" type="checkbox" class="option-checkbox" />
+                <span class="option-text">Include context snippets</span>
+              </label>
+              
+              <label class="option-item thread-label">
+                <span class="option-text">Thread ID (optional)</span>
+                <input id="thread-id" type="text" class="thread-input" placeholder="Leave blank for new conversation" />
+              </label>
+            </div>
+
+            <!-- Input Box -->
+            <div class="input-box-wrapper">
+              <textarea id="query-input" class="query-input" rows="1" placeholder="Ask me anything about your documents..." required></textarea>
+              <button type="submit" class="send-button">
+                <span class="send-icon">→</span>
+              </button>
+            </div>
+
+            <div class="input-helper-text">Press Shift+Enter for new line, Enter to send</div>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
