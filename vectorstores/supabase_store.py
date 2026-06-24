@@ -1,24 +1,25 @@
 from typing import List, Dict, Any
-from supabase import create_client
+from supabase import create_client, Client
 from core.config import config
 import logging
 
 logger = logging.getLogger(__name__)
+
+# 1. Initialize globally EXACTLY ONCE outside of any class or function
+# This ensures all threads share the exact same connection pool
+global_supabase_client: Client = create_client(
+    supabase_url=config.SUPABASE_URL,
+    supabase_key=config.SUPABASE_API_KEY
+)
 
 class SupabaseVectorDB:
     """
     Wrapper around Supabase Vector Store for storing and retrieving embeddings.
     """
     def __init__(self):
-        # Removed the global self.client initialization
         self.table = "documents"
-
-    def _get_client(self):
-        """Creates a fresh, thread-safe client per operation"""
-        return create_client(
-            supabase_url=config.SUPABASE_URL,
-            supabase_key=config.SUPABASE_API_KEY
-        )
+        # 2. Assign the global client to the instance
+        self.client = global_supabase_client
     
     def add_embedding(self, user_id: str, organization_id: str, document_name: str,
                       chunks: list[str], embeddings: list[List[float]],
@@ -40,18 +41,14 @@ class SupabaseVectorDB:
             rows.append(row)    
         logger.info(f"Adding {len(rows)} embeddings to Supabase for tenant_id: {organization_id}")
         
-        # Instantiate client locally for thread safety
-        client = self._get_client()
-        result = client.table(self.table).insert(rows).execute()
+        result = self.client.table(self.table).insert(rows).execute()
         return result
     
     def search(self, organization_id: str, user_id: str, query_embedding: List[float], top_k: int = 5):
         """
         Calls Supabase to perform a vector similarity search.
         """
-        # Instantiate client locally for thread safety
-        client = self._get_client()
-        response = client.rpc(
+        response = self.client.rpc(
             "match_documents",
             {   "p_org_id": organization_id,
                 "p_user_id": user_id,
@@ -65,9 +62,7 @@ class SupabaseVectorDB:
         """
         Retrieve all documents for a given tenant.
         """
-        # Instantiate client locally for thread safety
-        client = self._get_client()
-        response = client.table(self.table).select("*").eq("organization_id", organization_id).eq("user_id", user_id).execute()
+        response = self.client.table(self.table).select("*").eq("organization_id", organization_id).eq("user_id", user_id).execute()
         return response.data
     
 supa_base_vector_db = SupabaseVectorDB()
