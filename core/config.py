@@ -13,7 +13,7 @@ class Config:
     """
 
     def __init__(self):
-        self.OPENAI_API_KEY = env_loader.get("OPENAI_API_KEY")
+        self.OPENAI_API_KEY = env_loader.get("OPENAI_API_KEY").strip()
         self.SUPABASE_URL = env_loader.get("SUPABASE_URL", SUPABASE_URL)
         self.SUPABASE_API_KEY = env_loader.get("SUPABASE_API_KEY", SUPABASE_API_KEY)
 
