@@ -14,8 +14,8 @@ class Config:
 
     def __init__(self):
         self.OPENAI_API_KEY = env_loader.get("OPENAI_API_KEY").strip()
-        self.SUPABASE_URL = env_loader.get("SUPABASE_URL", SUPABASE_URL)
-        self.SUPABASE_API_KEY = env_loader.get("SUPABASE_API_KEY", SUPABASE_API_KEY)
+        self.SUPABASE_URL = env_loader.get("SUPABASE_URL", SUPABASE_URL).strip()
+        self.SUPABASE_API_KEY = env_loader.get("SUPABASE_API_KEY", SUPABASE_API_KEY).strip()
 
         # Constants
         self.EMBEDDING_MODEL = env_loader.get("EMBEDDING_MODEL", DEFAULT_EMBEDDING_MODEL)
