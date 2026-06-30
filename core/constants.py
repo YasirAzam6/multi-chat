@@ -18,5 +18,5 @@ TENANT_DOCS_DIR = "docs"
 TENANT_BITS_DIR = "agent_bits"
 
 
-SUPABASE_URL = "https://xlruzehlbbjehuzhytwn.supabase.co"
+SUPABASE_URL = "https://fmplybzezpsxwviyozbi.supabase.co"
 SUPABASE_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhscnV6ZWhsYmJqZWh1emh5dHduIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MDUzNTAxNCwiZXhwIjoyMDY2MTExMDE0fQ.RosLV-YxmXr2k9Cwvs_ZMoShmsj-PmZlKLw7n4j-D40"
