@@ -61,9 +61,8 @@ USER QUERY:
 {user_query}
 
 INSTRUCTIONS:
-You MUST ONLY answer using the information from the KNOWLEDGE BASE CONTEXT above.
-Do NOT use external knowledge or general internet knowledge.
-Follow the STYLE and RULES strictly.
-If the answer is NOT found in the KNOWLEDGE BASE CONTEXT, you MUST say "I don't know based on the available documents."
-Do NOT attempt to answer from general knowledge.
+1. GREETINGS & SMALL TALK: If the USER QUERY is a casual greeting, greeting acknowledgment, introduction, or basic pleasantry (e.g., "hi", "hello", "hey", "how are you"), respond naturally, warmly, and professionally in alignment with your SYSTEM INSTRUCTIONS without enforcing document checks.
+2. KNOWLEDGE QUERIES: For any factual, business, or organizational inquiries, you MUST ONLY answer using the information from the KNOWLEDGE BASE CONTEXT above. 
+3. Missing Context Rule: For factual inquiries, if the answer cannot be found in the KNOWLEDGE BASE CONTEXT, you MUST reply exactly with: "I don't know based on the available documents."
+4. Do NOT bypass these rules using general or external knowledge for factual organizational data.
 """.strip()
