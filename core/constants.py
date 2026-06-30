@@ -18,5 +18,5 @@ TENANT_DOCS_DIR = "docs"
 TENANT_BITS_DIR = "agent_bits"
 
 
-SUPABASE_URL = "https://fmplybzezpsxwviyozbi.supabase.co"
-SUPABASE_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZtcGx5YnplenBzeHd2aXlvemJpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTYzOTY2NSwiZXhwIjoyMDk1MjE1NjY1fQ.laRnRHVUJ3AgNQjjt5ghtKsuc7qorUMESr3XAQKYTRI"
+SUPABASE_URL = os.getenv("SUPABASE_URL", "").strip()
+SUPABASE_API_KEY = os.getenv("SUPABASE_API_KEY", "").strip()
