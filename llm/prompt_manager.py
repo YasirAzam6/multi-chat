@@ -27,15 +27,20 @@ class PromptManager:
         guardrails_prompt = self.tenant.config.get("guardrails", "")
         agent_bits_prompt = self._agent_bits_text()
 
-        print("DOC TYPE:", type(context_docs[0]))
-        print("DOC SAMPLE:", context_docs[0])
-
-        context_section = "\n".join(
-            doc.page_content for doc in context_docs
-        )
-        print("CONTEXT DOC COUNT:", len(context_docs))
-        print("FINAL CONTEXT:")
-        print(context_section[:1000])
+        # Robust check to handle cold starts/empty vector results safely
+        if context_docs and len(context_docs) > 0:
+            print("CONTEXT DOC COUNT:", len(context_docs))
+            print("DOC TYPE:", type(context_docs[0]))
+            print("DOC SAMPLE:", context_docs[0])
+            
+            context_section = "\n".join(
+                doc.page_content for doc in context_docs
+            )
+            print("FINAL CONTEXT:")
+            print(context_section[:1000])
+        else:
+            print("CONTEXT DOC COUNT: 0 (No documents found or empty query)")
+            context_section = "No specific reference documentation context is available for this request."
 
         return f"""
 SYSTEM INSTRUCTIONS:
